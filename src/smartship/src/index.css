@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap');
+
+:root {
+  --bg: #f8f6ef;
+  --text-primary: #1f2a28;
+  --text-muted: #5f6f6b;
+  --stroke: #d7d1bb;
+  --shadow: 0 12px 32px rgba(26, 42, 39, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'IBM Plex Sans', sans-serif;
+  background:
+    radial-gradient(circle at 10% 10%, #fff7e1 0, rgba(255, 247, 225, 0) 40%),
+    radial-gradient(circle at 90% 20%, #d7efe6 0, rgba(215, 239, 230, 0) 38%),
+    var(--bg);
+}
+
+h1,
+h2,
+h3,
+h4,
+.brand {
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+a {
+  color: #0f766e;
+  text-decoration: none;
+}
+
+/* ── OpenStreetMap Nominatim autocomplete dropdown ── */
+.osm-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  z-index: 999;
+  background: #fff;
+  border: 1px solid #d7d1bb;
+  border-radius: 12px;
+  box-shadow: 0 12px 32px rgba(26, 42, 39, 0.12);
+  list-style: none;
+  margin: 0;
+  padding: 0.3rem 0;
+  max-height: 260px;
+  overflow-y: auto;
+}
+
+.osm-dropdown-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  padding: 0.65rem 1rem;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.osm-dropdown-item:hover {
+  background: #f0faf8;
+}
+
+.osm-icon {
+  flex-shrink: 0;
+  font-size: 0.9rem;
+  margin-top: 1px;
+}
+
+.osm-label {
+  font-size: 0.85rem;
+  color: #2d4440;
+  line-height: 1.4;
+}

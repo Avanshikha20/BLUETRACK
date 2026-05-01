@@ -1,0 +1,14 @@
+# Ignore development secrets
+**/appsettings.Development.json
+
+# Ignore user secrets (just in case)
+**/secrets.json
+
+# Build folders
+**/bin/
+**/obj/
+
+# VS files
+.vs/
+*.user
+*.suo

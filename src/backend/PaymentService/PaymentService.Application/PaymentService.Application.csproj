@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\PaymentService.Core\PaymentService.Core.csproj" />
+    <ProjectReference Include="..\..\Shared.Models\Shared.Models.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="QuestPDF" Version="2026.2.4" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+</Project>

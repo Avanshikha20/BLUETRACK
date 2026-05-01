@@ -1,0 +1,35 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "src\\backend\\ApiGateway\\ApiGateway.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "src\\backend\\AdminService\\AdminService.API\\AdminService.API.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "src\\backend\\IdentityService\\IdentityService.API\\IdentityService.API.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "src\\backend\\NotificationService\\NotificationService.API\\NotificationService.API.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "src\\backend\\PaymentService\\PaymentService.API\\PaymentService.API.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "src\\backend\\ShipmentService\\ShipmentService.API\\ShipmentService.API.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "src\\backend\\TrackingService\\TrackingService.API\\TrackingService.API.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

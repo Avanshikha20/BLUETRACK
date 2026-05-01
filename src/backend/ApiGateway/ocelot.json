@@ -1,0 +1,589 @@
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/register",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5001
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/auth/register",
+      "UpstreamHttpMethod": [
+        "POST"
+      ]
+    },
+    {
+      "DownstreamPathTemplate": "/register",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5001
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/auth/signup",
+      "UpstreamHttpMethod": [
+        "POST"
+      ]
+    },
+    {
+      "DownstreamPathTemplate": "/login",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5001
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/auth/login",
+      "UpstreamHttpMethod": [
+        "POST"
+      ]
+    },
+    {
+      "DownstreamPathTemplate": "/verify-otp",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5001
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/auth/verify-otp",
+      "UpstreamHttpMethod": [
+        "POST"
+      ]
+    },
+    {
+      "DownstreamPathTemplate": "/google-login",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5001
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/auth/google-login",
+      "UpstreamHttpMethod": [
+        "POST"
+      ]
+    },
+    {
+      "DownstreamPathTemplate": "/shipments",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5002
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/shipments",
+      "UpstreamHttpMethod": [
+        "POST"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/shipments/my",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5002
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/shipments/my",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/shipments/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5002
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/shipments/{id}",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/shipments/drafts/latest",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5002
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/shipments/drafts/latest",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/shipments/draft",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5002
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/shipments/draft",
+      "UpstreamHttpMethod": [
+        "POST"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/shipments/{id}/draft",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5002
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/shipments/{id}/draft",
+      "UpstreamHttpMethod": [
+        "PUT"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/process",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5003
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/payments/process",
+      "UpstreamHttpMethod": [
+        "POST"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/orders",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5003
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/payments/orders",
+      "UpstreamHttpMethod": [
+        "POST"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/verify",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5003
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/payments/verify",
+      "UpstreamHttpMethod": [
+        "POST"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/invoice/{shipmentId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5003
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/payments/invoice/{shipmentId}",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/update",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5004
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/tracking/update",
+      "UpstreamHttpMethod": [
+        "POST"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/documents/upload",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5004
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/tracking/documents/upload",
+      "UpstreamHttpMethod": [
+        "POST"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/{id}/documents",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5004
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/tracking/{id}/documents",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/documents/{docId}/download",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5004
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/tracking/documents/{docId}/download",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5004
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/tracking/{id}",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/{id}/delivery-proof",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5004
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/tracking/{id}/delivery-proof",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/{id}/delivery-proof",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5004
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/tracking/{id}/delivery-proof",
+      "UpstreamHttpMethod": [
+        "POST"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/notify",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5005
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/notifications/notify",
+      "UpstreamHttpMethod": [
+        "POST"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/dashboard-metrics",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5007
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/admin/dashboard-metrics",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/dashboard-metrics",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5007
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/admin/dashboard",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/resolve-exception",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5007
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/admin/resolve-exception",
+      "UpstreamHttpMethod": [
+        "PUT"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/shipments/all",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5002
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/admin/shipments/all",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/shipments/all",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5002
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/admin/shipments",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/shipments/{id}/hub",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5002
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/admin/shipments/{id}/hub",
+      "UpstreamHttpMethod": [
+        "PUT"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/shipments/{id}/status",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5002
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/admin/shipments/{id}/status",
+      "UpstreamHttpMethod": [
+        "PUT"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/users",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5007
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/admin/users",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/reports",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5007
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/admin/reports",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/hubs",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5007
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/admin/hubs",
+      "UpstreamHttpMethod": [
+        "GET",
+        "POST"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/hubs/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5007
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/admin/hubs/{id}",
+      "UpstreamHttpMethod": [
+        "PUT",
+        "DELETE"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/users",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5001
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/identity/users",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:5000"
+  }
+}
