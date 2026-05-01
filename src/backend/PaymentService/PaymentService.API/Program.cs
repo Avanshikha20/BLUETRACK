@@ -1,3 +1,4 @@
+using MassTransit;
 using System.Text;
 using Shared.Infrastructure.Extensions;
 using Shared.Infrastructure.Middleware;
@@ -58,6 +59,20 @@ builder.Services.AddScoped<IRazorpayClient, RazorpayClient>();
 // Application Services
 builder.Services.AddScoped<IPaymentApplicationService, PaymentApplicationService>();
 builder.Services.AddScoped<IInvoiceGenerator, InvoiceGenerator>();
+
+// MassTransit
+builder.Services.AddMassTransit(x =>
+{
+    x.UsingRabbitMq((context, cfg) =>
+    {
+        cfg.Host("localhost", "/", h =>
+        {
+            h.Username("guest");
+            h.Password("guest");
+        });
+        cfg.ConfigureEndpoints(context);
+    });
+});
 
 // Authentication
 builder.Services

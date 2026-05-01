@@ -21,10 +21,12 @@ public interface IShipmentApplicationService
 public class ShipmentApplicationService : IShipmentApplicationService
 {
     private readonly IShipmentRepository _repository;
+    private readonly MassTransit.IPublishEndpoint _publishEndpoint;
 
-    public ShipmentApplicationService(IShipmentRepository repository)
+    public ShipmentApplicationService(IShipmentRepository repository, MassTransit.IPublishEndpoint publishEndpoint)
     {
         _repository = repository;
+        _publishEndpoint = publishEndpoint;
     }
 
     public async Task<ShipmentDto> CreateShipmentAsync(CreateShipmentRequest request, string ownerId, CancellationToken cancellationToken = default)
@@ -64,6 +66,9 @@ public class ShipmentApplicationService : IShipmentApplicationService
         };
 
         await _repository.AddShipmentAsync(shipment, cancellationToken);
+        
+        await _publishEndpoint.Publish(new Shared.Models.Messages.ShipmentCreatedEvent(shipment.Id, ownerId, DateTime.UtcNow), cancellationToken);
+
         return ToDto(shipment);
     }
 

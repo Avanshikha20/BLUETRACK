@@ -14,9 +14,12 @@ public sealed class ShipmentDbContext : DbContext
     public DbSet<Receiver> Receivers => Set<Receiver>();
     public DbSet<Package> Packages => Set<Package>();
     public DbSet<PickupDetails> Pickups => Set<PickupDetails>();
+    public DbSet<ShipmentService.Application.Sagas.ShipmentBookingState> ShipmentBookingStates => Set<ShipmentService.Application.Sagas.ShipmentBookingState>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.ApplyConfiguration(new ShipmentBookingStateMap());
+
         modelBuilder.Entity<Shipment>().HasKey(x => x.Id);
 
         modelBuilder.Entity<Package>().Property(x => x.WeightKg).HasPrecision(10, 2);

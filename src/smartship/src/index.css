@@ -1,11 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap');
 
 :root {
-  --bg: #f8f6ef;
-  --text-primary: #1f2a28;
-  --text-muted: #5f6f6b;
-  --stroke: #d7d1bb;
-  --shadow: 0 12px 32px rgba(26, 42, 39, 0.08);
+  --bg: #f0f9ff; /* Very light baby blue */
+  --text-primary: #0c4a6e; /* Deep blue */
+  --text-muted: #64748b;
+  --stroke: #bae6fd; /* Light blue border */
+  --shadow: 0 12px 32px rgba(12, 74, 110, 0.1);
+  --primary-blue: #0284c7;
+  --baby-blue: #e0f2fe;
 }
 
 * {
@@ -16,8 +18,8 @@ body {
   margin: 0;
   font-family: 'IBM Plex Sans', sans-serif;
   background:
-    radial-gradient(circle at 10% 10%, #fff7e1 0, rgba(255, 247, 225, 0) 40%),
-    radial-gradient(circle at 90% 20%, #d7efe6 0, rgba(215, 239, 230, 0) 38%),
+    radial-gradient(circle at 10% 10%, #e0f2fe 0, rgba(224, 242, 254, 0) 40%),
+    radial-gradient(circle at 90% 20%, #bae6fd 0, rgba(186, 230, 253, 0) 38%),
     var(--bg);
 }
 

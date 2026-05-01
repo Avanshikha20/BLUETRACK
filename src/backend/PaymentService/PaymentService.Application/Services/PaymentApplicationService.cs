@@ -28,13 +28,15 @@ public class PaymentApplicationService : IPaymentApplicationService
     private readonly IExternalServicesClient _externalClient;
     private readonly IRazorpayClient _razorpayClient;
     private readonly IInvoiceGenerator _invoiceGenerator;
+    private readonly MassTransit.IPublishEndpoint _publishEndpoint;
 
-    public PaymentApplicationService(IPaymentRepository repository, IExternalServicesClient externalClient, IRazorpayClient razorpayClient, IInvoiceGenerator invoiceGenerator)
+    public PaymentApplicationService(IPaymentRepository repository, IExternalServicesClient externalClient, IRazorpayClient razorpayClient, IInvoiceGenerator invoiceGenerator, MassTransit.IPublishEndpoint publishEndpoint)
     {
         _repository = repository;
         _externalClient = externalClient;
         _razorpayClient = razorpayClient;
         _invoiceGenerator = invoiceGenerator;
+        _publishEndpoint = publishEndpoint;
     }
 
     public async Task<RazorpayOrderResponse> CreateRazorpayOrderAsync(CreateRazorpayOrderRequest request, CancellationToken cancellationToken = default)
@@ -51,6 +53,8 @@ public class PaymentApplicationService : IPaymentApplicationService
     {
         if (!_razorpayClient.VerifyPaymentSignature(request.RazorpayOrderId, request.RazorpayPaymentId, request.RazorpaySignature))
         {
+            await _publishEndpoint.Publish(new Shared.Models.Messages.PaymentFailedEvent(request.ShipmentId, "Payment verification failed.", DateTime.UtcNow), cancellationToken);
+
             return new PaymentResult
             {
                 Status = "Failed",
@@ -87,25 +91,14 @@ public class PaymentApplicationService : IPaymentApplicationService
 
         await _repository.AddTransactionAndInvoiceAsync(transaction, invoice, cancellationToken);
 
-        var statusUpdateSuccess = await _externalClient.UpdateShipmentStatusAsync(shipmentId, "Booked", token, cancellationToken);
-
-        if (!statusUpdateSuccess)
-        {
-            return new PaymentResult
-            {
-                TransactionId = transaction.Id,
-                Status = transaction.Status,
-                InvoiceNumber = invoice.Number,
-                Warning = "Payment completed but shipment status update failed."
-            };
-        }
+        await _publishEndpoint.Publish(new Shared.Models.Messages.PaymentCompletedEvent(shipmentId, transaction.Id, DateTime.UtcNow), cancellationToken);
 
         return new PaymentResult
         {
             TransactionId = transaction.Id,
             Status = transaction.Status,
             InvoiceNumber = invoice.Number,
-            Message = "Payment completed and shipment booked."
+            Message = "Payment completed. Event published to Saga."
         };
     }
 

@@ -65,6 +65,13 @@ const SPEED_INFO = {
   Freight: { icon: '🚢', label: 'Freight Shipping', hint: '7–14 business days, cost-effective' },
 };
 
+const validatePhone = (phone) => {
+  // Allow exactly 10 digits, must start with 6, 7, 8, or 9
+  const cleaned = phone.replace(/[\s-]/g, '');
+  const phoneRegex = /^[6-9]\d{9}$/;
+  return phoneRegex.test(cleaned);
+};
+
 const ShipmentWizardPage = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -88,6 +95,7 @@ const ShipmentWizardPage = () => {
   const [shipType, setShipType] = useState('Domestic');   // Domestic | International
   const [shipSpeed, setShipSpeed] = useState('Express');  // Express  | Freight
   const [autoDetectedType, setAutoDetectedType] = useState(''); // set when both countries known
+  const [errors, setErrors] = useState({ senderPhone: '', receiverPhone: '' });
 
   // Auto-detect Domestic / International when both addresses have country codes
   useEffect(() => {
@@ -384,16 +392,26 @@ const ShipmentWizardPage = () => {
             }}
           />
           <input
-            className="input"
+            className={`input ${errors.senderPhone ? 'error' : ''}`}
             placeholder="Phone"
             value={form.sender.phone}
-            onChange={(e) => setForm({ ...form, sender: { ...form.sender, phone: e.target.value } })}
+            onChange={(e) => {
+              setForm({ ...form, sender: { ...form.sender, phone: e.target.value } });
+              if (errors.senderPhone) setErrors({ ...errors, senderPhone: '' });
+            }}
           />
+          {errors.senderPhone && <p className="error-text" style={{ color: '#ef4444', fontSize: '0.75rem', marginTop: '-0.5rem', marginBottom: '1rem' }}>{errors.senderPhone}</p>}
           <div className="row gap">
             <button className="button ghost" onClick={saveDraft} disabled={loading}>
               Save as Draft
             </button>
-            <button className="button" onClick={() => setStep(1)}>Next →</button>
+            <button className="button" onClick={() => {
+              if (!validatePhone(form.sender.phone)) {
+                setErrors({ ...errors, senderPhone: 'Please enter a valid 10-digit phone number starting with 6-9.' });
+                return;
+              }
+              setStep(1);
+            }}>Next →</button>
           </div>
         </div>
       )}
@@ -420,17 +438,27 @@ const ShipmentWizardPage = () => {
             }}
           />
           <input
-            className="input"
+            className={`input ${errors.receiverPhone ? 'error' : ''}`}
             placeholder="Phone"
             value={form.receiver.phone}
-            onChange={(e) => setForm({ ...form, receiver: { ...form.receiver, phone: e.target.value } })}
+            onChange={(e) => {
+              setForm({ ...form, receiver: { ...form.receiver, phone: e.target.value } });
+              if (errors.receiverPhone) setErrors({ ...errors, receiverPhone: '' });
+            }}
           />
+          {errors.receiverPhone && <p className="error-text" style={{ color: '#ef4444', fontSize: '0.75rem', marginTop: '-0.5rem', marginBottom: '1rem' }}>{errors.receiverPhone}</p>}
           <div className="row gap">
             <button className="button ghost" onClick={() => setStep(0)}>← Back</button>
             <button className="button ghost" onClick={saveDraft} disabled={loading}>
               Save as Draft
             </button>
-            <button className="button" onClick={() => setStep(2)}>Next →</button>
+            <button className="button" onClick={() => {
+              if (!validatePhone(form.receiver.phone)) {
+                setErrors({ ...errors, receiverPhone: 'Please enter a valid 10-digit phone number starting with 6-9.' });
+                return;
+              }
+              setStep(2);
+            }}>Next →</button>
           </div>
         </div>
       )}
@@ -446,13 +474,13 @@ const ShipmentWizardPage = () => {
           {/* Auto-detection banner */}
           {autoDetectedType && (
             <div style={{
-              background: autoDetectedType === 'International' ? 'rgba(99,102,241,0.08)' : 'rgba(52,211,153,0.08)',
-              border: `1px solid ${autoDetectedType === 'International' ? 'rgba(99,102,241,0.3)' : 'rgba(52,211,153,0.3)'}`,
+              background: autoDetectedType === 'International' ? 'rgba(2,132,199,0.08)' : 'rgba(14,165,233,0.08)',
+              border: `1px solid ${autoDetectedType === 'International' ? 'rgba(2,132,199,0.3)' : 'rgba(14,165,233,0.3)'}`,
               borderRadius: 8,
               padding: '0.6rem 1rem',
               fontSize: '0.82rem',
               marginBottom: '1rem',
-              color: autoDetectedType === 'International' ? '#a5b4fc' : '#34d399',
+              color: autoDetectedType === 'International' ? '#0284c7' : '#0369a1',
               display: 'flex',
               alignItems: 'center',
               gap: '0.5rem',
@@ -475,8 +503,8 @@ const ShipmentWizardPage = () => {
                 type="button"
                 onClick={() => setShipType(key)}
                 style={{
-                  background: shipType === key ? 'rgba(99,102,241,0.12)' : 'rgba(30,41,59,0.5)',
-                  border: shipType === key ? '2px solid #818cf8' : '2px solid rgba(71,85,105,0.3)',
+                  background: shipType === key ? 'rgba(2,132,199,0.12)' : 'rgba(186,230,253,0.5)',
+                  border: shipType === key ? '2px solid #0284c7' : '2px solid rgba(186,230,253,0.3)',
                   borderRadius: 12,
                   padding: '1rem',
                   cursor: 'pointer',
@@ -486,7 +514,7 @@ const ShipmentWizardPage = () => {
                 }}
               >
                 <div style={{ fontSize: '1.4rem', marginBottom: '0.3rem' }}>{info.icon}</div>
-                <div style={{ fontWeight: 600, fontSize: '0.9rem', color: shipType === key ? '#a5b4fc' : '#c7d2fe' }}>{info.label}</div>
+                <div style={{ fontWeight: 600, fontSize: '0.9rem', color: shipType === key ? '#0369a1' : '#0284c7' }}>{info.label}</div>
                 <div style={{ fontSize: '0.75rem', color: '#64748b', marginTop: '0.15rem' }}>{info.hint}</div>
               </button>
             ))}
@@ -503,8 +531,8 @@ const ShipmentWizardPage = () => {
                 type="button"
                 onClick={() => setShipSpeed(key)}
                 style={{
-                  background: shipSpeed === key ? 'rgba(99,102,241,0.12)' : 'rgba(30,41,59,0.5)',
-                  border: shipSpeed === key ? '2px solid #818cf8' : '2px solid rgba(71,85,105,0.3)',
+                  background: shipSpeed === key ? 'rgba(2,132,199,0.12)' : 'rgba(186,230,253,0.5)',
+                  border: shipSpeed === key ? '2px solid #0284c7' : '2px solid rgba(186,230,253,0.3)',
                   borderRadius: 12,
                   padding: '1rem',
                   cursor: 'pointer',
@@ -514,7 +542,7 @@ const ShipmentWizardPage = () => {
                 }}
               >
                 <div style={{ fontSize: '1.4rem', marginBottom: '0.3rem' }}>{info.icon}</div>
-                <div style={{ fontWeight: 600, fontSize: '0.9rem', color: shipSpeed === key ? '#a5b4fc' : '#c7d2fe' }}>{info.label}</div>
+                <div style={{ fontWeight: 600, fontSize: '0.9rem', color: shipSpeed === key ? '#0369a1' : '#0284c7' }}>{info.label}</div>
                 <div style={{ fontSize: '0.75rem', color: '#64748b', marginTop: '0.15rem' }}>{info.hint}</div>
               </button>
             ))}
@@ -522,15 +550,15 @@ const ShipmentWizardPage = () => {
 
           {/* Pricing preview */}
           <div style={{
-            background: 'rgba(99,102,241,0.06)',
-            border: '1px solid rgba(99,102,241,0.15)',
+            background: 'rgba(2,132,199,0.06)',
+            border: '1px solid rgba(2,132,199,0.15)',
             borderRadius: 8,
             padding: '0.7rem 1rem',
             fontSize: '0.82rem',
-            color: '#94a3b8',
+            color: '#0c4a6e',
             marginBottom: '0.5rem',
           }}>
-            💡 <strong style={{ color: '#a5b4fc' }}>{SHIP_TYPE_INFO[shipType].label} {SPEED_INFO[shipSpeed].label}</strong>
+            💡 <strong style={{ color: '#0369a1' }}>{SHIP_TYPE_INFO[shipType].label} {SPEED_INFO[shipSpeed].label}</strong>
             &nbsp;— Base ₹{PRICING[shipType][shipSpeed].base} + ₹{PRICING[shipType][shipSpeed].perKm}/km + ₹{PRICING[shipType][shipSpeed].perKg}/kg
           </div>
 

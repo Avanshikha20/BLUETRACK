@@ -13,7 +13,7 @@
   padding: 1rem 1.5rem;
   border-bottom: 1px solid var(--stroke);
   backdrop-filter: blur(10px);
-  background: rgba(248, 246, 239, 0.76);
+  background: rgba(240, 249, 255, 0.8);
 }
 
 .brand {
@@ -28,6 +28,11 @@
   margin: 1.5rem auto;
 }
 
+section h2, .card h3 {
+  text-align: center;
+  color: var(--text-primary);
+}
+
 .auth-shell {
   min-height: 72vh;
   display: grid;
@@ -36,7 +41,8 @@
 
 .card {
   width: min(560px, 100%);
-  background: linear-gradient(145deg, #fffef7, #fbf8ea);
+  margin: 0 auto;
+  background: linear-gradient(145deg, #ffffff, #f0f9ff);
   border: 1px solid var(--stroke);
   box-shadow: var(--shadow);
   border-radius: 18px;
@@ -47,7 +53,7 @@
 }
 
 .input {
-  border: 1px solid #c7c1a8;
+  border: 1px solid #bae6fd;
   border-radius: 10px;
   padding: 0.7rem 0.85rem;
   font-size: 0.98rem;
@@ -60,14 +66,23 @@
   border-radius: 10px;
   padding: 0.72rem 1rem;
   font-weight: 700;
-  background: #0d9488;
-  color: #f3fdfb;
+  background: #0284c7;
+  color: #fff;
   cursor: pointer;
+  transition: all 0.2s;
+}
+
+.button:hover {
+  background: #0369a1;
 }
 
 .button.ghost {
-  background: #dbe9e8;
-  color: #165e59;
+  background: #e0f2fe;
+  color: #0369a1;
+}
+
+.button.ghost:hover {
+  background: #bae6fd;
 }
 
 .button.tiny {
@@ -121,19 +136,20 @@
   flex-wrap: wrap;
   gap: 0.5rem;
   margin-bottom: 0.9rem;
+  justify-content: center;
 }
 
 .step {
-  border: 1px solid #b8b39f;
+  border: 1px solid #bae6fd;
   border-radius: 999px;
   padding: 0.3rem 0.7rem;
   font-size: 0.9rem;
 }
 
 .step.active {
-  background: #0d9488;
+  background: #0284c7;
   color: #fff;
-  border-color: #0d9488;
+  border-color: #0284c7;
 }
 
 .table {
@@ -162,6 +178,10 @@
 
 .error {
   color: #b42318;
+}
+
+.input.error {
+  border-color: #ef4444;
 }
 
 .modal-backdrop {

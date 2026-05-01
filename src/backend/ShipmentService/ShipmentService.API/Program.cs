@@ -1,3 +1,4 @@
+using MassTransit;
 using System.Text;
 using Shared.Infrastructure.Extensions;
 using Shared.Infrastructure.Middleware;
@@ -53,6 +54,27 @@ builder.Services.AddScoped<IShipmentRepository, ShipmentRepository>();
 
 // Application Services
 builder.Services.AddScoped<IShipmentApplicationService, ShipmentApplicationService>();
+
+// MassTransit
+builder.Services.AddMassTransit(x =>
+{
+    x.AddSagaStateMachine<ShipmentService.Application.Sagas.ShipmentBookingStateMachine, ShipmentService.Application.Sagas.ShipmentBookingState>()
+        .EntityFrameworkRepository(r =>
+        {
+            r.ConcurrencyMode = ConcurrencyMode.Pessimistic;
+            r.AddDbContext<DbContext, ShipmentDbContext>();
+        });
+
+    x.UsingRabbitMq((context, cfg) =>
+    {
+        cfg.Host("localhost", "/", h =>
+        {
+            h.Username("guest");
+            h.Password("guest");
+        });
+        cfg.ConfigureEndpoints(context);
+    });
+});
 
 // Authentication
 builder.Services
