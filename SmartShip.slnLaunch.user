@@ -29,6 +29,14 @@
       {
         "Path": "src\\backend\\TrackingService\\TrackingService.API\\TrackingService.API.csproj",
         "Action": "Start"
+      },
+      {
+        "Path": "src\\backend\\AIChatbotService\\AIChatbotService.API\\AIChatbotService.API.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "src\\backend\\AIChatbotService\\AIChatbotService.Core\\AIChatbotService.Core.csproj",
+        "Action": "Start"
       }
     ]
   }
